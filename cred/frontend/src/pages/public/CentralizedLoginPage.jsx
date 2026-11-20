@@ -18,9 +18,10 @@ import {
 } from "lucide-react";
 
 export const CentralizedLoginPage = () => {
-  const [identifier, setIdentifier] = useState("");
+  const location = useLocation();
+  const [identifier, setIdentifier] = useState(location.state?.email || "");
   const [password, setPassword] = useState("");
-  const [selectedRole, setSelectedRole] = useState("admin");
+  const [selectedRole, setSelectedRole] = useState(["admin", "partner", "employee"].includes(location.state?.role) ? location.state.role : "admin");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -29,7 +30,6 @@ export const CentralizedLoginPage = () => {
   const { login } = useAuth();
   const { showToast } = useApp();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -233,17 +233,13 @@ export const CentralizedLoginPage = () => {
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                     Password
                   </label>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      alert(
-                        "For password recovery, please contact corporate IT support at security@realcred.in.",
-                      )
-                    }
+                  <Link
+                    to="/forgot-password"
+                    state={{ role: selectedRole, email: identifier }}
                     className="text-[11px] font-bold text-[#DC2626] hover:underline cursor-pointer"
                   >
                     Forgot Password?
-                  </button>
+                  </Link>
                 </div>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">

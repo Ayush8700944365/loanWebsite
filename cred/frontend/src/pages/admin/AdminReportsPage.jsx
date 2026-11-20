@@ -47,7 +47,7 @@ const COLORS = [
 ];
 
 const CURRENCY = (value) =>
-  `â‚¹${Number(value || 0).toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+  `₹${Number(value || 0).toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
 
 const dateValue = (record, fields) => {
   for (const field of fields) {
@@ -235,9 +235,9 @@ export const AdminReportsPage = () => {
 
           name: employee.name || employee.fullName || code || "Employee",
 
-          designation: employee.designation || employee.role || "â€”",
+          designation: employee.designation || employee.role || "—",
 
-          status: employee.status || "â€”",
+          status: employee.status || "—",
 
           assigned: assigned.length,
 
@@ -551,7 +551,7 @@ export const AdminReportsPage = () => {
     }
 
     const escapeHTML = (value) =>
-      String(value ?? "â€”").replace(
+      String(value ?? "—").replace(
         /[&<>"']/g,
         (char) =>
           ({
@@ -613,7 +613,7 @@ export const AdminReportsPage = () => {
         <body>
           <header>
             <h1>REALCRED TECHNOLOGY PRIVATE LIMITED</h1>
-            <p class="subtitle">Reports &amp; Analytics Â· ${escapeHTML(reportTitle)}</p>
+            <p class="subtitle">Reports &amp; Analytics · ${escapeHTML(reportTitle)}</p>
           </header>
           <div class="meta">
             <span><strong>Report:</strong> ${escapeHTML(reportTitle)}</span>
@@ -625,7 +625,7 @@ export const AdminReportsPage = () => {
             <thead><tr>${tableHead}</tr></thead>
             <tbody>${tableBody}</tbody>
           </table>
-          <footer>Generated from the RealCred CRM Â· Confidential</footer>
+          <footer>Generated from the RealCred CRM · Confidential</footer>
         </body>
       </html>`);
     printWindow.document.close();
@@ -835,7 +835,7 @@ export const AdminReportsPage = () => {
   }, [pageCount]);
 
   const formatDate = (value) => {
-    if (!value) return "â€”";
+    if (!value) return "—";
 
     const date = new Date(value);
 
@@ -958,7 +958,7 @@ export const AdminReportsPage = () => {
               </h3>
 
               <p className="text-xs text-slate-500 mt-1">
-                {range.label} Â· Based on available CRM records
+                {range.label} · Based on available CRM records
               </p>
             </div>
 
@@ -1015,7 +1015,7 @@ export const AdminReportsPage = () => {
 
                   <YAxis
                     tickFormatter={(v) =>
-                      `â‚¹${Number(v).toLocaleString("en-IN")}`
+                      `₹${Number(v).toLocaleString("en-IN")}`
                     }
                     tick={{ fontSize: 10 }}
                     stroke="#94a3b8"
@@ -1238,7 +1238,7 @@ export const AdminReportsPage = () => {
             </h3>
 
             <p className="text-xs text-slate-500 mt-1">
-              {tableRows.length} records Â· {range.label}
+              {tableRows.length} records · {range.label}
             </p>
           </div>
 
@@ -1370,13 +1370,13 @@ export const AdminReportsPage = () => {
                         {(row.leadCode || row.id) ? formatLeadUid(row.leadCode || row.id) : "-"}
                       </td>
 
-                      <td className="px-4 py-3">{row.customerName || "â€”"}</td>
+                      <td className="px-4 py-3">{row.customerName || "—"}</td>
 
-                      <td className="px-4 py-3">{row.loanCategory || "â€”"}</td>
+                      <td className="px-4 py-3">{row.loanCategory || "—"}</td>
 
                       <td className="px-4 py-3">{CURRENCY(row.loanAmount)}</td>
 
-                      <td className="px-4 py-3">{row.currentStatus || "â€”"}</td>
+                      <td className="px-4 py-3">{row.currentStatus || "—"}</td>
 
                       <td className="px-4 py-3">
                         {row.assignedEmployee || "Unassigned"}
@@ -1390,7 +1390,7 @@ export const AdminReportsPage = () => {
                     <>
                       <td className="px-4 py-3 font-semibold">{row.name}</td>
 
-                      <td className="px-4 py-3">{row.id || "â€”"}</td>
+                      <td className="px-4 py-3">{row.id || "—"}</td>
 
                       <td className="px-4 py-3">{row.designation}</td>
 
@@ -1404,7 +1404,7 @@ export const AdminReportsPage = () => {
                     <>
                       <td className="px-4 py-3 font-semibold">{row.name}</td>
 
-                      <td className="px-4 py-3">{row.id || "â€”"}</td>
+                      <td className="px-4 py-3">{row.id || "—"}</td>
 
                       <td className="px-4 py-3">{row.leads}</td>
 
@@ -1419,36 +1419,36 @@ export const AdminReportsPage = () => {
                   ) : reportType === "invoices" ? (
                     <>
                       <td className="px-4 py-3 font-semibold">
-                        {row.invoiceNumber || "â€”"}
+                        {row.invoiceNumber || "—"}
                       </td>
 
                       <td className="px-4 py-3">
                         {formatDate(row.invoiceDate || row.createdAt)}
                       </td>
 
-                      <td className="px-4 py-3">{row.customerName || "â€”"}</td>
+                      <td className="px-4 py-3">{row.customerName || "—"}</td>
 
-                      <td className="px-4 py-3">{row.bankName || "â€”"}</td>
+                      <td className="px-4 py-3">{row.bankName || "—"}</td>
 
                       <td className="px-4 py-3">
                         {CURRENCY(row.invoiceAmount)}
                       </td>
 
-                      <td className="px-4 py-3">{row.invoiceStatus || "â€”"}</td>
+                      <td className="px-4 py-3">{row.invoiceStatus || "—"}</td>
 
-                      <td className="px-4 py-3">{row.utr || "â€”"}</td>
+                      <td className="px-4 py-3">{row.utr || "—"}</td>
                     </>
                   ) : (
                     <>
                       <td className="px-4 py-3 font-semibold">
-                        {row.paymentNumber || "â€”"}
+                        {row.paymentNumber || "—"}
                       </td>
 
                       <td className="px-4 py-3">
                         {formatDate(row.paymentDate || row.createdAt)}
                       </td>
 
-                      <td className="px-4 py-3">{row.partnerName || "â€”"}</td>
+                      <td className="px-4 py-3">{row.partnerName || "—"}</td>
 
                       <td className="px-4 py-3">{row.leadId ? formatLeadUid(row.leadId) : "—"}</td>
 
@@ -1458,9 +1458,9 @@ export const AdminReportsPage = () => {
 
                       <td className="px-4 py-3">{CURRENCY(row.totalAmount)}</td>
 
-                      <td className="px-4 py-3">{row.status || "â€”"}</td>
+                      <td className="px-4 py-3">{row.status || "—"}</td>
 
-                      <td className="px-4 py-3">{row.utr || "â€”"}</td>
+                      <td className="px-4 py-3">{row.utr || "—"}</td>
                     </>
                   )}
                 </tr>
@@ -1479,7 +1479,7 @@ export const AdminReportsPage = () => {
             </tbody>
           </table>
         </div>
-        {tableRows.length > pageSize && <div className="flex items-center justify-between border-t border-slate-100 px-5 py-3 text-xs"><span className="text-slate-500">Showing {(currentPage - 1) * pageSize + 1}â€“{Math.min(currentPage * pageSize, tableRows.length)} of {tableRows.length}</span><div className="flex gap-2"><button type="button" disabled={currentPage <= 1} onClick={() => setCurrentPage((page) => Math.max(1, page - 1))} className="rounded-lg border px-3 py-1.5 font-semibold disabled:opacity-40">Previous</button><span className="self-center text-slate-500">Page {currentPage} of {pageCount}</span><button type="button" disabled={currentPage >= pageCount} onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))} className="rounded-lg border px-3 py-1.5 font-semibold disabled:opacity-40">Next</button></div></div>}
+        {tableRows.length > pageSize && <div className="flex items-center justify-between border-t border-slate-100 px-5 py-3 text-xs"><span className="text-slate-500">Showing {(currentPage - 1) * pageSize + 1}–{Math.min(currentPage * pageSize, tableRows.length)} of {tableRows.length}</span><div className="flex gap-2"><button type="button" disabled={currentPage <= 1} onClick={() => setCurrentPage((page) => Math.max(1, page - 1))} className="rounded-lg border px-3 py-1.5 font-semibold disabled:opacity-40">Previous</button><span className="self-center text-slate-500">Page {currentPage} of {pageCount}</span><button type="button" disabled={currentPage >= pageCount} onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))} className="rounded-lg border px-3 py-1.5 font-semibold disabled:opacity-40">Next</button></div></div>}
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ const PartnerCorrectionPage = lazy(() => import("../pages/public/PartnerCorrecti
 const ContactPage = lazy(() => import("../pages/public/ContactPage").then((module) => ({ default: module.ContactPage })));
 const PrivacyPolicyPage = lazy(() => import("../pages/public/PrivacyPolicyPage").then((module) => ({ default: module.PrivacyPolicyPage })));
 const CentralizedLoginPage = lazy(() => import("../pages/public/CentralizedLoginPage").then((module) => ({ default: module.CentralizedLoginPage })));
+const PasswordRecoveryPage = lazy(() => import("../pages/public/PasswordRecoveryPage").then((module) => ({ default: module.PasswordRecoveryPage })));
 const ChangePasswordPage = lazy(() => import("../pages/shared/ChangePasswordPage").then((module) => ({ default: module.ChangePasswordPage })));
 
 // Admin Pages
@@ -84,17 +85,19 @@ export const AppRoutes = () => {
 
       {/* 2. Centralized Authentication Entry Point */}
       <Route path="/login" element={<CentralizedLoginPage />} />
+      <Route path="/forgot-password" element={<PasswordRecoveryPage />} />
+      <Route path="/reset-password" element={<PasswordRecoveryPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/change-password" element={<ChangePasswordPage />} />
       </Route>
 
       {/* Legacy login paths automatically route to centralized login */}
-      <Route path="/admin/login" element={<Navigate to="/login" replace />} />
+      <Route path="/admin/login" element={<Navigate to="/login" replace state={{ role: "admin" }} />} />
       <Route
         path="/employee/login"
-        element={<Navigate to="/login" replace />}
+        element={<Navigate to="/login" replace state={{ role: "employee" }} />}
       />
-      <Route path="/partner/login" element={<Navigate to="/login" replace />} />
+      <Route path="/partner/login" element={<Navigate to="/login" replace state={{ role: "partner" }} />} />
 
       {/* 3. Protected Admin Portal Routes */}
       <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>

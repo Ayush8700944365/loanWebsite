@@ -237,6 +237,9 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
 
+    passwordResetTokenHash: { type: String, select: false, default: undefined },
+    passwordResetExpiresAt: { type: Date, select: false, default: undefined },
+
     // Incremented on logout or credential reset to invalidate issued JWTs.
     tokenVersion: {
       type: Number,

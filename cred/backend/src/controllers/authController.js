@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { maskPartnerAccount } from "../services/partnerSensitiveData.js";
-import { randomBytes } from "crypto";
+import { createHash, randomBytes } from "crypto";
+import { getPasswordResetUrl, isPasswordResetEmailConfigured, sendPasswordResetEmail } from "../services/passwordResetEmail.js";
 
 const sessionCookie = "realcred_session";
 const csrfCookie = "realcred_csrf";
@@ -23,6 +24,72 @@ const generateToken = (userId, tokenVersion = 0) => {
   return jwt.sign({ userId, tokenVersion }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN || "1d",
   });
+};
+
+const passwordResetMessage = "If an active account matches those details, a password reset link will be sent to its email address.";
+
+export const requestPasswordReset = async (req, res) => {
+  const email = String(req.body?.email || "").trim().toLowerCase();
+  const role = String(req.body?.role || "").trim().toLowerCase();
+  if (!["admin", "partner", "employee"].includes(role)) return res.status(400).json({ success: false, message: "Choose Admin, Partner, or Employee." });
+  if (!/^\S+@\S+\.\S+$/.test(email) || email.length > 254) return res.status(400).json({ success: false, message: "Enter a valid account email address." });
+  if (process.env.NODE_ENV === "production" && !isPasswordResetEmailConfigured()) {
+    return res.status(503).json({ success: false, message: "Password recovery email is not configured. Please contact your administrator." });
+  }
+
+  try {
+    const user = await User.findOne({ email, role, status: "active" }).select("+passwordResetTokenHash +passwordResetExpiresAt");
+    if (!user) return res.json({ success: true, message: passwordResetMessage });
+
+    const token = randomBytes(32).toString("hex");
+    user.passwordResetTokenHash = createHash("sha256").update(token).digest("hex");
+    user.passwordResetExpiresAt = new Date(Date.now() + 30 * 60 * 1000);
+    await user.save();
+    const resetUrl = getPasswordResetUrl(token);
+
+    if (!isPasswordResetEmailConfigured() && process.env.NODE_ENV !== "production") {
+      return res.json({ success: true, message: "Email delivery is not configured in this development environment. Use this one-time development link to finish the reset.", developmentResetUrl: resetUrl });
+    }
+
+    try {
+      await sendPasswordResetEmail({ to: user.email, resetUrl });
+    } catch (error) {
+      user.passwordResetTokenHash = undefined;
+      user.passwordResetExpiresAt = undefined;
+      await user.save();
+      console.error("Password reset email delivery failed:", error.message);
+    }
+    return res.json({ success: true, message: passwordResetMessage });
+  } catch (error) {
+    console.error("Password reset request failed:", error.message);
+    return res.status(500).json({ success: false, message: "Unable to process the password reset request. Please try again." });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  const token = String(req.body?.token || "").trim();
+  const newPassword = req.body?.newPassword;
+  if (!/^[a-f\d]{64}$/i.test(token)) return res.status(400).json({ success: false, message: "This password reset link is invalid or has expired." });
+  if (typeof newPassword !== "string" || newPassword.length < 12 || newPassword.length > 128) {
+    return res.status(400).json({ success: false, message: "Choose a password between 12 and 128 characters." });
+  }
+
+  try {
+    const tokenHash = createHash("sha256").update(token).digest("hex");
+    const user = await User.findOne({ passwordResetTokenHash: tokenHash, passwordResetExpiresAt: { $gt: new Date() } }).select("+passwordResetTokenHash +passwordResetExpiresAt");
+    if (!user) return res.status(400).json({ success: false, message: "This password reset link is invalid or has expired." });
+
+    user.password = newPassword;
+    user.passwordResetTokenHash = undefined;
+    user.passwordResetExpiresAt = undefined;
+    user.mustChangePassword = false;
+    user.tokenVersion = (user.tokenVersion || 0) + 1;
+    await user.save();
+    return res.json({ success: true, message: "Password reset successfully. Sign in with your new password." });
+  } catch (error) {
+    console.error("Password reset failed:", error.message);
+    return res.status(500).json({ success: false, message: "Unable to reset the password. Please try again." });
+  }
 };
 
 // Safe user response (never expose password)

@@ -156,7 +156,7 @@ export const AdminApplicationsPage = () => {
                   </td>
                   <td className="py-3.5 px-4">
                     <div className="font-bold text-slate-900 text-sm">{app.customerName}</div>
-                    <span className="text-[11px] text-slate-500">{app.loanType} â€¢ {app.phone}</span>
+                    <span className="text-[11px] text-slate-500">{app.loanType} • {app.phone}</span>
                   </td>
                   <td className="py-3.5 px-4 text-slate-700 font-medium">
                     {app.bankName}
@@ -265,7 +265,7 @@ export const AdminApplicationsPage = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">Requested Amount (â‚¹)</label>
+                  <label className="font-bold text-slate-700 block mb-1">Requested Amount (₹)</label>
                   <input
                     type="number"
                     value={newAppForm.requestedAmount}

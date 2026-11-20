@@ -138,6 +138,14 @@ export const authApi = {
       body: JSON.stringify({ email, username, password, role }),
     });
   },
+  requestPasswordReset: ({ email, role }) => apiRequest("/auth/forgot-password", {
+    method: "POST",
+    body: JSON.stringify({ email, role }),
+  }),
+  resetPassword: ({ token, newPassword }) => apiRequest("/auth/reset-password", {
+    method: "POST",
+    body: JSON.stringify({ token, newPassword }),
+  }),
 
   getCurrentUser: async () => {
     const response = await apiRequest("/auth/me", {
