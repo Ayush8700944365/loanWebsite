@@ -247,7 +247,7 @@ export const PublicLayout = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4 text-[#DC2626]" />
-                  <span>globalmarketing140@gmail.com</span>
+                  <span>Customercare@realcred.in</span>
                 </div>
               </div>
             </div>

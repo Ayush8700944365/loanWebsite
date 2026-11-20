@@ -62,10 +62,9 @@ export const ContactPage = () => {
                   </div>
                   <div>
                     <span className="font-bold text-slate-800 block">Direct Hotline</span>
-                    <span className="text-slate-600">7048976349
-
-</span>
-                    <span className="block text-slate-500 font-mono"></span>
+                    <span className="text-slate-600">+918527710939
+                    </span>
+                    <span className="block text-slate-500 font-mono">+917048976349</span>
                   </div>
                 </div>
 
