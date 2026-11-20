@@ -1,0 +1,1 @@
+import{j as o}from"./vendor-icons-lf6Pj1DR.js";import"./vendor-react-D6LDu2R9.js";import{L as e}from"./LeadDocumentsWorkspace-in9vHPY5.js";import"./index-BC33_bYe.js";const s=()=>o.jsx(e,{employee:!0});export{s as EmployeeDocumentsPage};

@@ -18,14 +18,22 @@ import commissionRuleRoutes from "./routes/commissionRuleRoutes.js";
 import documentRoutes from "./routes/documentRoutes.js";
 import rateLimit from "express-rate-limit";
 import mongoose from "mongoose";
+import { existsSync } from "node:fs";
 import { mkdir, access } from "fs/promises";
+import { extname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { DOCUMENT_STORAGE_DIR } from "./services/leadDocumentService.js";
 import workQueueRoutes from "./routes/workQueueRoutes.js";
 import interiorReferralRoutes from "./routes/interiorReferralRoutes.js";
 
+const frontendDist = fileURLToPath(new URL("../dist/", import.meta.url));
+const frontendIndex = fileURLToPath(new URL("../dist/index.html", import.meta.url));
+const frontendPath = /^(?!\/api(?:\/|$))/i;
+
 export function createApp() {
   const app = express();
   app.disable("x-powered-by");
+  if (process.env.APP_HOST === "127.0.0.1") app.set("trust proxy", "loopback");
   app.use(helmet());
   const allowedClientOrigins = new Set([
     ...(process.env.CLIENT_URL || "http://localhost:5173").split(",").map((origin) => origin.trim()).filter(Boolean),
@@ -34,6 +42,11 @@ export function createApp() {
     "http://localhost:4173",
     "http://127.0.0.1:4173",
   ]);
+  if (process.env.NODE_ENV !== "production") {
+    const port = process.env.PORT || 5000;
+    allowedClientOrigins.add(`http://localhost:${port}`);
+    allowedClientOrigins.add(`http://127.0.0.1:${port}`);
+  }
   app.use(cors({
     origin(origin, callback) {
       if (!origin || allowedClientOrigins.has(origin)) return callback(null, true);
@@ -81,6 +94,22 @@ export function createApp() {
   app.use("/api/interior-referrals", interiorReferralRoutes);
   app.use("/api/banks", bankRoutes);
   app.use("/api/guides", guideRoutes);
+
+  if (existsSync(frontendIndex)) {
+    app.use(frontendPath, helmet.contentSecurityPolicy({
+      directives: {
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        imgSrc: ["'self'", "data:", "blob:", "https://images.unsplash.com"],
+        frameSrc: ["'self'", "blob:", "https://www.google.com"],
+        ...(process.env.NODE_ENV === "production" ? {} : { upgradeInsecureRequests: null }),
+      },
+    }), express.static(frontendDist, { index: false, redirect: false }));
+    app.get(frontendPath, (req, res, next) => {
+      if (extname(req.path) || /\/(?:\.|%2e)|^\/assets(?:\/|$)/i.test(req.path) || !req.accepts("html")) return next();
+      res.set("Cache-Control", "no-cache");
+      return res.sendFile(frontendIndex);
+    });
+  }
 
   app.use((req, res) => res.status(404).json({ success: false, message: `Route not found: ${req.originalUrl}` }));
   app.use((error, req, res, _next) => {

@@ -16,7 +16,7 @@ const startServer = async () => {
     }
     await connectDB();
     const port = process.env.PORT || 5000;
-    app.listen(port, () => {
+    app.listen(port, process.env.APP_HOST || undefined, () => {
       console.log("--------------------------------");
       console.log(`RealCred Backend: http://localhost:${port}`);
       console.log(`Health API: http://localhost:${port}/api/health`);

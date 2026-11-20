@@ -1,5 +1,6 @@
 ﻿node_modules/
 dist/
+!/cred/backend/dist/
 .env
 .env.*
 !.env.example

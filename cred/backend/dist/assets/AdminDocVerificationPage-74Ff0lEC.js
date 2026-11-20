@@ -1,0 +1,1 @@
+import{j as o}from"./vendor-icons-lf6Pj1DR.js";import"./vendor-react-D6LDu2R9.js";import{L as r}from"./LeadDocumentsWorkspace-in9vHPY5.js";import"./index-BC33_bYe.js";const e=()=>o.jsx(r,{});export{e as AdminDocVerificationPage};

@@ -8,6 +8,7 @@ export const DOCUMENT_STORAGE_DIR = path.resolve(
   process.env.DOCUMENT_STORAGE_PATH || path.join(backendRoot, "private-documents"),
 );
 const forbiddenStorageRoots = [
+  path.join(backendRoot, "dist"),
   path.join(backendRoot, "public"),
   path.join(backendRoot, "uploads"),
   path.resolve(backendRoot, "../frontend/public"),
