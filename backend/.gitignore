@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+uploads/*
+!uploads/documents/
+uploads/documents/*
+!.gitkeep
+private-documents/
+
+.DS_Store
+npm-debug.log*
