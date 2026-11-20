@@ -1,0 +1,35 @@
+import React from "react";
+
+const Svg = ({ children, size = 32, title, className = "", color = "#1F1416", accentColor = "#D62828", softColor = "#FBE3E3" }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className} style={{ color, "--icon-accent": accentColor, "--icon-soft": softColor }} role={title ? "img" : undefined} aria-hidden={title ? undefined : "true"}>
+    {title && <title>{title}</title>}
+    {children}
+  </svg>
+);
+
+export const HomeIcon = (props) => <Svg {...props}><path d="m5 22 19-16 19 16v19H29V28H19v13H5V22Z" fill="var(--icon-soft)" stroke="var(--icon-accent)" strokeWidth="2.2" strokeLinejoin="round"/><path d="M19 41V28h10v13M3 23 24 5l21 18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M35 14V8h5v10" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round"/></Svg>;
+export const KeyIcon = (props) => <Svg {...props}><circle cx="17" cy="19" r="10" fill="var(--icon-soft)" stroke="var(--icon-accent)" strokeWidth="2.2"/><circle cx="17" cy="19" r="3" stroke="currentColor" strokeWidth="2"/><path d="m24 26 16 16m-6-6 5-5m-10 0 5-5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"/></Svg>;
+export const CoinStack = (props) => <Svg {...props}><ellipse cx="24" cy="35" rx="16" ry="7" fill="var(--icon-soft)" stroke="var(--icon-accent)" strokeWidth="2"/><path d="M8 28c0 4 7 7 16 7s16-3 16-7M8 21c0 4 7 7 16 7s16-3 16-7M8 21v14m32-14v14M8 21c0-4 7-7 16-7s16 3 16 7" stroke="var(--icon-accent)" strokeWidth="2"/><path d="M24 17v8m3-6c0-1-1-2-3-2s-3 1-3 2 1 2 3 2 3 1 3 2-1 2-3 2-3-1-3-2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/></Svg>;
+export const DocumentCheck = (props) => <Svg {...props}><path d="M12 5h17l8 8v30H12V5Z" fill="#fff" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round"/><path d="M29 5v9h8M18 22h12M18 28h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><circle cx="33" cy="34" r="8" fill="var(--icon-accent)"/><path d="m29 34 2.5 2.5 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></Svg>;
+export const ShieldCheck = (props) => <Svg {...props}><path d="M24 4 39 10v12c0 10-6 17-15 22C15 39 9 32 9 22V10l15-6Z" fill="var(--icon-soft)" stroke="var(--icon-accent)" strokeWidth="2.2" strokeLinejoin="round"/><path d="m17 23 5 5 10-11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></Svg>;
+export const GrowthChart = (props) => <Svg {...props}><path d="M7 40h35M10 35l10-11 8 6 13-17" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/><path d="M33 13h8v8" stroke="var(--icon-accent)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="29" width="5" height="11" rx="1" fill="var(--icon-soft)"/><rect x="20" y="23" width="5" height="17" rx="1" fill="var(--icon-soft)"/><rect x="31" y="27" width="5" height="13" rx="1" fill="var(--icon-soft)"/></Svg>;
+export const Handshake = (props) => <Svg {...props}><path d="m4 20 9-9 8 2 4-2 7 2 12 9-6 7-7-5-8 10-5-3-4 1-8-8-2-4Z" fill="var(--icon-soft)" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/><path d="m4 20 8 8m7-15-6 7m17-5-7 7m-9 1 9 8m5-10 8 7" stroke="var(--icon-accent)" strokeWidth="2" strokeLinecap="round"/></Svg>;
+export const CarIcon = (props) => <Svg {...props}><path d="m8 29 3-11h26l4 11v10h-6v-5H13v5H8V29Z" fill="var(--icon-soft)" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round"/><path d="m13 18 3-8h16l4 8M9 27h31" stroke="var(--icon-accent)" strokeWidth="2.2" strokeLinejoin="round"/><circle cx="16" cy="31" r="2" fill="currentColor"/><circle cx="33" cy="31" r="2" fill="currentColor"/></Svg>;
+export const GradCap = (props) => <Svg {...props}><path d="m4 18 20-10 20 10-20 10L4 18Z" fill="var(--icon-soft)" stroke="var(--icon-accent)" strokeWidth="2.2" strokeLinejoin="round"/><path d="M12 22v10c7 5 17 5 24 0V22M42 19v12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/><circle cx="42" cy="34" r="2" fill="var(--icon-accent)"/></Svg>;
+export const BriefcaseIcon = (props) => <Svg {...props}><rect x="5" y="15" width="38" height="26" rx="3" fill="var(--icon-soft)" stroke="currentColor" strokeWidth="2.2"/><path d="M17 15V9h14v6M5 25h38M21 25v5h6v-5" stroke="var(--icon-accent)" strokeWidth="2.2" strokeLinejoin="round"/></Svg>;
+export const BuildingIcon = (props) => <Svg {...props}><path d="M7 42V8h24v34M31 18h10v24M3 42h42" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round"/><path d="M13 14h4m7 0h2m-13 8h4m7 0h2m-13 8h4m7 0h2m8 0h3m-3 6h3" stroke="var(--icon-accent)" strokeWidth="2.2" strokeLinecap="round"/><path d="M16 42v-7h7v7" stroke="currentColor" strokeWidth="2"/></Svg>;
+
+export function HeroIllustration() {
+  return (
+    <svg viewBox="0 0 560 480" className="home-hero-art" role="img" aria-labelledby="hero-art-title">
+      <title id="hero-art-title">A home loan application moving through review toward a new home</title>
+      <defs><pattern id="home-dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#D62828" opacity=".22"/></pattern></defs>
+      <circle cx="280" cy="235" r="196" fill="#FDF1F1"/><circle cx="280" cy="235" r="176" fill="url(#home-dots)" opacity=".6"/>
+      <g className="home-art-float"><path d="m149 224 119-94 117 94v126H149V224Z" fill="#fff" stroke="#1F1416" strokeWidth="5" strokeLinejoin="round"/><path d="m127 230 141-112 139 112" fill="#FBE3E3" stroke="#D62828" strokeWidth="7" strokeLinejoin="round"/><path d="M235 350v-91h68v91" fill="#FDF1F1" stroke="#1F1416" strokeWidth="5"/><path d="M177 243h47v47h-47zm129 0h47v47h-47z" fill="#FBE3E3" stroke="#1F1416" strokeWidth="4"/><path d="M200 243v47m-23-23h47m82-24v47m-23-23h47" stroke="#D62828" strokeWidth="3"/><path d="m363 123 18 18 34-37" stroke="#D62828" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/></g>
+      <g className="home-art-card"><rect x="31" y="86" width="130" height="105" rx="12" fill="#fff" stroke="#1F1416" strokeWidth="3"/><path d="M53 115h76M53 133h51M53 151h40" stroke="#9AA0A8" strokeWidth="5" strokeLinecap="round"/><circle cx="132" cy="166" r="16" fill="#D62828"/><path d="m124 166 5 5 10-11" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></g>
+      <g className="home-art-coin"><circle cx="457" cy="122" r="38" fill="#D62828"/><circle cx="457" cy="122" r="29" fill="none" stroke="#fff" strokeWidth="2" opacity=".8"/><path d="M465 108c-2-3-5-5-9-5-5 0-9 3-9 7 0 12 20 6 20 17 0 5-5 9-11 9-4 0-8-2-10-5m10-34v40" stroke="#fff" strokeWidth="3" strokeLinecap="round"/></g>
+      <g className="home-art-shield"><path d="m416 277 38 14v29c0 25-15 42-38 55-23-13-38-30-38-55v-29l38-14Z" fill="#fff" stroke="#1F1416" strokeWidth="4"/><path d="m398 319 12 12 24-27" stroke="#D62828" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/></g>
+      <path d="M80 389h399" stroke="#1F1416" strokeOpacity=".15" strokeWidth="3" strokeLinecap="round"/>
+    </svg>
+  );
+}

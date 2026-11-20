@@ -1,0 +1,71 @@
+.home-loan-scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.875rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.home-loan-scene .scene-main {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: realcred-scene-drift 5.6s ease-in-out infinite;
+}
+
+.home-loan-scene .scene-sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: realcred-scene-twinkle 2.8s ease-in-out infinite;
+}
+
+.home-loan-scene .scene-sparkle--two {
+  animation-delay: -1.4s;
+}
+
+.home-loan-city-scene {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.home-loan-city-scene .loan-city-tower {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: realcred-city-rise 7s ease-in-out infinite;
+}
+
+.home-loan-city-scene .loan-city-route {
+  stroke-dasharray: 3 9;
+  animation: realcred-city-route 12s linear infinite;
+}
+
+@keyframes realcred-scene-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes realcred-scene-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.7); }
+  50% { opacity: 0.95; transform: scale(1.2); }
+}
+
+@keyframes realcred-city-rise {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -2px; }
+}
+
+@keyframes realcred-city-route {
+  to { stroke-dashoffset: -72; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-loan-scene *,
+  .home-loan-city-scene * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

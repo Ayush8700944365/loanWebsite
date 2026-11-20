@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="600" y1="0" x2="600" y2="740" gradientUnits="userSpaceOnUse"><stop stop-color="#FDF1F1" stop-opacity=".12"/><stop offset="1" stop-color="#FBE3E3" stop-opacity=".72"/></linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#D62828" fill-opacity=".2"/></pattern>
+  </defs>
+  <ellipse cx="824" cy="324" rx="319" ry="280" fill="url(#sky)"/>
+  <ellipse cx="824" cy="324" rx="319" ry="280" fill="url(#dots)" opacity=".45"/>
+  <path d="M455 578V353l123-85 122 85v225" stroke="#D62828" stroke-opacity=".13" stroke-width="4"/>
+  <path d="m429 356 149-107 151 107" stroke="#D62828" stroke-opacity=".17" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M535 578V438h82v140m-135-157h46v50h-46zm121 0h47v50h-47z" stroke="#8F1616" stroke-opacity=".11" stroke-width="4"/>
+  <path d="M790 579V201h205v378" fill="#fff" fill-opacity=".34" stroke="#8F1616" stroke-opacity=".1" stroke-width="4"/>
+  <path d="M831 248h45v58h-45zm75 0h45v58h-45zm-75 98h45v58h-45zm75 0h45v58h-45zm-75 98h45v58h-45zm75 0h45v58h-45z" fill="#D62828" fill-opacity=".055" stroke="#8F1616" stroke-opacity=".08" stroke-width="3"/>
+  <path d="M717 580h389M375 580h113" stroke="#D62828" stroke-opacity=".13" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="1040" cy="183" r="47" fill="#fff" fill-opacity=".7"/><circle cx="1040" cy="183" r="27" stroke="#D62828" stroke-opacity=".18" stroke-width="3"/>
+  <path d="M1027 183h26m-13-13v26" stroke="#D62828" stroke-opacity=".22" stroke-width="3" stroke-linecap="round"/>
+  <path d="M336 640c175-64 307-8 466-35 135-23 240-100 398-55" stroke="#D62828" stroke-opacity=".12" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 13"/>
+</svg>
